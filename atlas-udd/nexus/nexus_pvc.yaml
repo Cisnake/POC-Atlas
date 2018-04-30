@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-   name: nexusazurefile
+   name: nexus-claim
 spec:
    accessModes:
     - ReadWriteOnce
