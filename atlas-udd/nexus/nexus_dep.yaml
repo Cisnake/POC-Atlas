@@ -17,8 +17,29 @@ spec:
             - image: atlas_udd/nexus:1.0
               name: atlas-nexus
               ports:
-              - containerPort: 8081
-              - containerPort: 5000
+                - containerPort: 8081
+                - containerPort: 5000
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 4800Mi
+                request:
+                  cpu: 250m
+                   memory: 4800Mi
+              livenessProbe:
+                httpGet:
+                  path: /
+                  port: 8081
+                initialDelaySeconds: 30
+                periodSeconds: 30
+                failureThreshold: 6
+              readinessProbe:
+                httpGet:
+                  path: /
+                  port: 8081
+                initialDelaySeconds: 30
+                periodSeconds: 6
+                failureThreshold: 6
               volumeMounts:
                  - mountPath: /nexus-data
                    name: nexus-data-volume
