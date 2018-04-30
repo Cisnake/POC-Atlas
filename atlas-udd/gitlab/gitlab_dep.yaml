@@ -32,8 +32,11 @@ spec:
               mountPath: /var/opt/gitlab
       volumes:
         - name: gitlab-config
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-config-claim
         - name: gitlab-logs
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-log-claim
         - name: gitlab-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-data-claim
