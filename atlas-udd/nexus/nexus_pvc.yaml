@@ -5,4 +5,4 @@ metadata:
 spec:
    accessModes:
     - ReadWriteOnce
-storageClassName: gitlabazurefile
+storageClassName: uddstorageclass
