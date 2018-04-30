@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-   name: gitlab-logs-claim
+   name: gitlab-log-claim
 spec:
    accessModes:
     - ReadWriteOnce
