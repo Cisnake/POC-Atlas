@@ -16,6 +16,18 @@ spec:
       containers:
         - image: atlas_udd/gitlab:1.0
           name: atlas-gitlab
+          env:
+            - name: GITLAB_OMNIBUS_CONFIG
+              value: |
+                postgresql['enable'] = false
+                gitlab_rails['db_username'] = "poccrm@poccrmdb"
+                gitlab_rails['db_password'] = "poc@2019"
+                gitlab_rails['db_host'] = "poccrmdb.postgres.database.azure.com"
+                gitlab_rails['db_port'] = "5432"
+                gitlab_rails['db_database'] = "postgres"
+                gitlab_rails['db_adapter'] = 'postgresql'
+                gitlab_rails['db_encoding'] = 'utf8'
+                external_url 'http://atlas.gitlab'
           ports:
             - containerPort: 80
               name: gitlabport1
