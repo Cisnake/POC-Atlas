@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: gitlabazurefile
+spec:
+   accessModes:
+    - ReadWriteOnce
+storageClassName: gitlabazurefile
