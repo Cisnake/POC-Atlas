@@ -24,4 +24,5 @@ spec:
                    name: nexus-data-volume
          volumes:
             - name: nexus-data-volume
-              emptyDir: {}
+              persistentVolumeClaim:
+                 claimName: nexus-claim
