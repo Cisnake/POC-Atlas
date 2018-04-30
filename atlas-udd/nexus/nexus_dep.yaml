@@ -38,7 +38,7 @@ spec:
                   path: /
                   port: 8081
                 initialDelaySeconds: 30
-                periodSeconds: 6
+                periodSeconds: 30
                 failureThreshold: 6
               volumeMounts:
                  - mountPath: /nexus-data
