@@ -23,24 +23,25 @@ spec:
               volumeMounts:
                  - name: jenkins-home
                    mountPath: /var/jenkins_home
-                 - name: maven-repo
-                   mountPath: /tools/maven_repository
-                 - name: docker-socket
-                   mountPath: /var/run/docker.sock
-                 - name: docker
-                   mountPath: /usr/bin/docker
+                 #- name: maven-repo
+                 #  mountPath: /tools/maven_repository
+                 #- name: docker-socket
+                 #  mountPath: /var/run/docker.sock
+                 #- name: docker
+                 #  mountPath: /usr/bin/docker
          volumes:
-            - name: maven-repo
-              hostPath:
-                 path: /tools/maven_repository
-                 type: Directory
             - name: jenkins-home
-              emptyDir: {}
-            - name: docker-socket
-              hostPath:
-                 path: /var/run/docker.sock
-                 type: Socket
-            - name: docker
-              hostPath:
-                 path: /usr/bin/docker
-                 type: File     
+              persistentVolumeClaim:
+                 claimName: jenkins-claim
+            #- name: maven-repo
+            #  hostPath:
+            #     path: /tools/maven_repository
+            #     type: Directory
+            #- name: docker-socket
+            #  hostPath:
+            #     path: /var/run/docker.sock
+            #     type: Socket
+            #- name: docker
+            #  hostPath:
+            #     path: /usr/bin/docker
+            #     type: File     
