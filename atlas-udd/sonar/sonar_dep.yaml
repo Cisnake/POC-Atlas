@@ -29,6 +29,13 @@ spec:
           ports:
             - containerPort: 9000
               name: sonarport
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            request:
+              cpu: 100m
+              memory: 128Mi
           livenessProbe:
             httpGet:
               path: /
