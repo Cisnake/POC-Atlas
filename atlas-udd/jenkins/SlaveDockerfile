@@ -14,12 +14,15 @@ USER root
 RUN mkdir /usr/share/downloads && \
         mkdir /tools
 
-##RUN curl "http://mirror.vorboss.net/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz" > /usr/share/jenkins/ref/downloads/apache-maven-3.5.2-bin.tar.gz
-##RUN curl "http://ftp.osuosl.org/pub/funtoo/distfiles/oracle-java/jdk-8u144-linux-x64.tar.gz" > /usr/share/jenkins/ref/downloads/jdk-8u144-linux-x64.tar.gz
-COPY apache-maven-3.5.2-bin.tar.gz /usr/share/downloads/apache-maven-3.5.2-bin.tar.gz
-COPY jdk-8u144-linux-x64.tar.gz /usr/share/downloads/jdk-8u144-linux-x64.tar.gz
-COPY docker-18.03.0-ce.tgz /usr/share/downloads/docker-18.03.0-ce.tgz
-COPY kubectl /usr/bin/kubectl
+RUN curl "http://mirror.vorboss.net/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz" > /usr/share/jenkins/ref/downloads/apache-maven-3.5.2-bin.tar.gz
+RUN curl "http://ftp.osuosl.org/pub/funtoo/distfiles/oracle-java/jdk-8u144-linux-x64.tar.gz" > /usr/share/jenkins/ref/downloads/jdk-8u144-linux-x64.tar.gz
+RUN curl "https://storage.googleapis.com/kubernetes-release/release/v1.9.6/bin/linux/amd64/kubectl" > /usr/bin/kubectl
+RUN curl "https://download.docker.com/linux/static/stable/x86_64/docker-18.03.0-ce.tgz" > /usr/share/jenkins/ref/downloads/docker-18.03.0-ce.tgz
+
+##COPY apache-maven-3.5.2-bin.tar.gz /usr/share/downloads/apache-maven-3.5.2-bin.tar.gz
+##COPY jdk-8u144-linux-x64.tar.gz /usr/share/downloads/jdk-8u144-linux-x64.tar.gz
+##COPY docker-18.03.0-ce.tgz /usr/share/downloads/docker-18.03.0-ce.tgz
+##COPY kubectl /usr/bin/kubectl
 
 RUN cd /usr/share/downloads && \
         tar xzvf jdk-8u144-linux-x64.tar.gz -C /tools && \
