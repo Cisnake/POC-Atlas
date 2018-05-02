@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: sonar-claim
+spec:
+   accessModes:
+    - ReadWriteOnce
+storageClassName: uddstorageclass
