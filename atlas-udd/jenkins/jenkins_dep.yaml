@@ -27,6 +27,18 @@ spec:
                 request:
                   cpu: 200m
                   memory: 256Mi
+              livenessProbe:
+                httpGet:
+                  path: /login
+                  port: 8080
+                initialDelaySeconds: 60
+                timeoutSeconds: 5
+                failureThreshold: 12
+              readinessProbe:
+                httpGet:
+                  path: /login
+                  port: 8080
+                initialDelaySeconds: 60  
               volumeMounts:
                  - name: jenkins-home
                    mountPath: /var/jenkins_home
