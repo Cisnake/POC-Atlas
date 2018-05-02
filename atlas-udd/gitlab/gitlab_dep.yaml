@@ -34,7 +34,32 @@ spec:
             - containerPort: 443
               name: gitlabport2
             - containerPort: 22
-              name: gitlabport3            
+              name: gitlabport3
+          resources:
+            limits:
+              cpu: 750m
+              memory: 4800Mi
+            request:
+              cpu: 750m
+              memory: 4800Mi
+          livenessProbe:
+            httpGet:
+              path: /help
+              port: 80
+            initialDelaySeconds: 200
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /help
+              port: 80
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
           volumeMounts:
             - name: gitlab-config
               mountPath: /etc/gitlab
