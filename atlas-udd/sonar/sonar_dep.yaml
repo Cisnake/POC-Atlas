@@ -29,9 +29,23 @@ spec:
           ports:
             - containerPort: 9000
               name: sonarport
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9000
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            failureThreshold: 6
           volumeMounts:
-            - name: v-sonar-home-data
+            - name: sonar-home-data
               mountPath: /opt/sonarqube/data
       volumes:
-        - name: v-sonar-home-data
-          emptyDir: {}
+        - name: sonar-home-data
+          persistentVolumeClaim:
+                 claimName: sonar-claim
