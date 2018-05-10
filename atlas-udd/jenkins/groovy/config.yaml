@@ -11,21 +11,21 @@ PLUGINS:
     KUBERNETES:
         - NAME: 'Kubernetes'
           SERVER_URL: 'https://10.0.2.15:6443'
-          SKIP_TLS_VERIFY: true
+          SKIP_TLS_VERIFY: false 
           NAMESPACE: 
           JENKINS_URL: 'http://atlas-jenkins:18080'
           CREDENTIALS_ID:
-          CONTAINER_CAP_STR: '500'
+          CONTAINER_CAP_STR: '10'
           RETENTION_TIMEOUT: 5
           CONNECT_TIMEOUT: 0
           READ_TIMEOUT: 0
-          MAX_REQUESTS_PER_HOST_STR: 35
+          MAX_REQUESTS_PER_HOST_STR: '32'
           
           # Kubernetes Pod Template list 
           POD_TEMPLATES:
-              - NAME:  'toto1'
+              - NAME:  'jenkins-slave'
                 NAMESPACE: 'atlas-udd'
-                LABEL: 'toto2'
+                LABEL: 'jenkins-slave'
                 # Container Template list
                 CONTAINER_TEMPLATE:
                     - NAME: 'jenkins-slave'
@@ -36,6 +36,11 @@ PLUGINS:
                       ARGS: 'cat'
                       TTY_ENABLED: true
                       PRIVILIGIED: false
+                      INITIAL_DELAY_SECONDS: 0
+                      TIMEOUT_SECONDS: 0
+                      FAILURE_THRESHOLD: 0
+                      PERIOD_SECONDS: 0
+                      SUCCESS_THRESHOLD: 0
                 # Volumes list
                 VOLUMES:        
                     - TYPE: 'HostPathVolume'
@@ -44,3 +49,7 @@ PLUGINS:
                     - TYPE: 'HostPathVolume'
                       MOUNT_PATH: '/tools/maven_repository'
                       HOST_PATH: '/tools/maven_repository'
+    SONARS:
+        - NAME: 'sonar'
+          SERVER_URL: 'http://atlas-sonar:19000'
+
