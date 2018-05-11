@@ -32,7 +32,7 @@ PLUGINS:
                       IMAGE: 'jenkins/jnlp-slave:alpine'
                       ALWAYS_PULL_IMAGE: false
                       WORKING_DIR: '/home/jenkins'
-                      COMMAND: '/bin/sh-c'
+                      COMMAND: '/bin/sh -c'
                       ARGS: 'cat'
                       TTY_ENABLED: true
                       PRIVILIGIED: false
