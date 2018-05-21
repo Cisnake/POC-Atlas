@@ -6,7 +6,7 @@ metadata:
 spec:
    accessModes:
       - ReadWriteMany
-   storageClassName: manual3 
+   storageClassName: git-data-cs 
    resources:
       requests:
          storage: 3Gi 

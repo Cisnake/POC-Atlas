@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-   name: gitlab-data-claim1
+   name: git-data-volume
    namespace: atlas-udd
 spec:
    accessModes:
       - ReadWriteMany
-   storageClassName: manual3 
+   storageClassName: git-data-sc
    capacity:
       storage: 3Gi
    hostPath:
-      path: /vlm/gitlab/v2
+      path: /mnt/gitlab/data

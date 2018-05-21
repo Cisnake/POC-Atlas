@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-   name: gitlab-config-claim1
+   name: git-cnf-volume
    namespace: atlas-udd
 spec:
    accessModes:
       - ReadWriteMany
-   storageClassName: manual 
+   storageClassName: git-cnf-sc 
    capacity:
       storage: 3Gi
    hostPath:
-      path: /vlm/gitlab/v1      
+      path: /mnt/gitlab/cnf    

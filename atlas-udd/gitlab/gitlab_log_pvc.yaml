@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-   name: gitlab-log-claim
+   name: git-log-claim
    namespace: atlas-udd
 spec:
    accessModes:
       - ReadWriteMany
-   storageClassName: manual2 
+   storageClassName: git-log-sc 
    resources:
       requests:
          storage: 3Gi

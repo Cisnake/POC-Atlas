@@ -45,10 +45,10 @@ spec:
       volumes:
         - name: gitlab-config
           persistentVolumeClaim:
-            claimName: gitlab-config-claim
+            claimName: git-cnf-claim
         #- name: gitlab-logs
         #  persistentVolumeClaim:
         #  claimName: gitlab-log-claim
         - name: gitlab-data
           persistentVolumeClaim:
-            claimName: gitlab-data-claim
+            claimName: git-data-claim
