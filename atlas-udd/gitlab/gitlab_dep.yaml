@@ -16,6 +16,16 @@ spec:
       containers:
         - image: atlas_udd/gitlab:1.0
           name: atlas-gitlab
+		  env:
+            - name: GITLAB_OMNIBUS_CONFIG
+              value: |
+                external_url 'http://atlas.gitlab'
+                manage_storage_directories['manage_etc'] = false;
+                gitlab_shell['auth_file'] = '/gitlab-data/ssh/authorized_keys';
+                git_data_dir '/gitlab-data/git-data';
+                gitlab_rails['shared_path'] = '/gitlab-data/shared';
+                gitlab_rails['uploads_directory'] = '/gitlab-data/uploads';
+                gitlab_ci['builds_directory'] = '/gitlab-data/builds';
           ports:
             - containerPort: 80
               name: gitlabport1
@@ -26,14 +36,19 @@ spec:
           volumeMounts:
             - name: gitlab-config
               mountPath: /etc/gitlab
-            - name: gitlab-logs
-              mountPath: /var/log/gitlab
+            #- name: gitlab-logs
+            #  mountPath: /var/log/gitlab
+            #- name: gitlab-data
+            #  mountPath: /var/opt/gitlab
             - name: gitlab-data
-              mountPath: /var/opt/gitlab
+              mountPath: /gitlab-data
       volumes:
         - name: gitlab-config
-          emptyDir: {}
-        - name: gitlab-logs
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-config-claim
+        #- name: gitlab-logs
+        #  persistentVolumeClaim:
+        #  claimName: gitlab-log-claim
         - name: gitlab-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: gitlab-data-claim
