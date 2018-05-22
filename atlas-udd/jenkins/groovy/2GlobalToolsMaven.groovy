@@ -11,7 +11,7 @@ def extensions = Jenkins.instance.getExtensionList(Maven.DescriptorImpl.class)[0
 
 List<MavenInstallation> installations = []
 
-mavenToool = ['name': 'maven3', 'home': '/tools/apache-maven-3.5.2']
+mavenToool = ['name': 'maven3', 'home': '/tools/apache-maven-3.0.5']
 
 println("Setting up tool: ${mavenToool.name} ")
 
