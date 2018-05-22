@@ -14,36 +14,19 @@ spec:
             app: atlas-nexus
       spec:
          containers:
-            - image: atlas_udd/nexus:1.0
+            - image: poccrmacr.azurecr.io/atlas_udd/nexus:1.2
               name: atlas-nexus
               ports:
                 - containerPort: 8081
-                - containerPort: 5000
-              resources:
-                limits:
-                  cpu: 250m
-                  memory: 4800Mi
-                request:
-                  cpu: 250m
-                  memory: 4800Mi
-              livenessProbe:
-                httpGet:
-                  path: /
-                  port: 8081
-                initialDelaySeconds: 30
-                periodSeconds: 30
-                failureThreshold: 6
-              readinessProbe:
-                httpGet:
-                  path: /
-                  port: 8081
-                initialDelaySeconds: 30
-                periodSeconds: 30
-                failureThreshold: 6
+                - containerPort: 5000 
               volumeMounts:
-                 - mountPath: /nexus-data
-                   name: nexus-data-volume
+                - mountPath: /sonatype-work
+                  name: nexus-data-volume
+         securityContext:
+            fsGroup: 1000
          volumes:
             - name: nexus-data-volume
               persistentVolumeClaim:
-                 claimName: nexus-claim
+                 claimName: udd-nexus-claim
+         imagePullSecrets:
+            - name: poccrmacrauth

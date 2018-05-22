@@ -1,8 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-   name: nexus-claim
+   name: udd-nexus-claim
+   namespace: atlas-udd
 spec:
    accessModes:
     - ReadWriteOnce
-storageClassName: uddstorageclass
+   storageClassName: uddazurefilescnexus
+   resources:
+    requests:
+      storage: 20Gi
