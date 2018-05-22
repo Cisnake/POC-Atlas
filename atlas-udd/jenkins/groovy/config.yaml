@@ -10,10 +10,10 @@ PLUGINS:
     # Kubernetes Cloud List
     KUBERNETES:
         - NAME: 'Kubernetes'
-          SERVER_URL: 'https://10.0.2.15:6443'
+          SERVER_URL: 'https://poccrmaksc-rg-total-dv-we-p-47ea92-1afb7c44.hcp.westeurope.azmk8s.io:443'
           SKIP_TLS_VERIFY: false 
           NAMESPACE: 
-          JENKINS_URL: 'http://atlas-jenkins:18080'
+          JENKINS_URL: 'http://atlas-jenkins:8080'
           CREDENTIALS_ID:
           CONTAINER_CAP_STR: '10'
           RETENTION_TIMEOUT: 5
@@ -32,7 +32,7 @@ PLUGINS:
                       IMAGE: 'jenkins/jnlp-slave:alpine'
                       ALWAYS_PULL_IMAGE: false
                       WORKING_DIR: '/home/jenkins'
-                      COMMAND: '/bin/sh-c'
+                      COMMAND: '/bin/sh -c'
                       ARGS: 'cat'
                       TTY_ENABLED: true
                       PRIVILIGIED: false
@@ -51,5 +51,4 @@ PLUGINS:
                       HOST_PATH: '/tools/maven_repository'
     SONARS:
         - NAME: 'sonar'
-          SERVER_URL: 'http://atlas-sonar:19000'
-
+          SERVER_URL: 'http://atlas-sonar:9000'
