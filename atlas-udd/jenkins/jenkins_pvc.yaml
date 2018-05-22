@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+   name: jenkins-claim
+   namespace: atlas-udd
+spec:
+   accessModes:
+    - ReadWriteMany
+   storageClassName: uddazurefilescjenkins
+   resources:
+    requests:
+      storage: 10Gi

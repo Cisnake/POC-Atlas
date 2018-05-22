@@ -13,32 +13,13 @@ spec:
             app: atlas-jenkins
       spec:
          containers:
-            - name: jenkins-maste
-              image: atlas_udd/jenkins_master:1.0
+            - name: jenkins-master
+              image: poccrmacr.azurecr.io/atlas_udd/jenkinsmaster:4.0
               ports:
                  - name: http-port
                    containerPort: 8080
                  - name: jnlp-port
-                   containerPort: 50000
-              resources:
-                limits:
-                  cpu: 200m
-                  memory: 256Mi
-                request:
-                  cpu: 200m
-                  memory: 256Mi
-              livenessProbe:
-                httpGet:
-                  path: /login
-                  port: 8080
-                initialDelaySeconds: 60
-                timeoutSeconds: 5
-                failureThreshold: 12
-              readinessProbe:
-                httpGet:
-                  path: /login
-                  port: 8080
-                initialDelaySeconds: 60  
+                   containerPort: 50000  
               volumeMounts:
                  - name: jenkins-home
                    mountPath: /var/jenkins_home
@@ -48,14 +29,15 @@ spec:
                    mountPath: /var/run/docker.sock
                  #- name: docker
                  #  mountPath: /usr/bin/docker
+         imagePullSecrets:
+            - name: poccrmacrauth
          volumes:
             - name: jenkins-home
               persistentVolumeClaim:
                  claimName: jenkins-claim
             - name: maven-repo
-              hostPath:
-                 path: /tools/maven_repository
-                 type: Directory
+              persistentVolumeClaim:
+                 claimName: maven-repo-claim
             - name: docker-socket
               hostPath:
                  path: /var/run/docker.sock
@@ -63,4 +45,4 @@ spec:
             #- name: docker
             #  hostPath:
             #     path: /usr/bin/docker
-            #     type: File     
+            #     type: File  
