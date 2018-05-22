@@ -2,7 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
    name: sonar-claim
+   namespace: atlas-udd
 spec:
    accessModes:
-    - ReadWriteOnce
-storageClassName: uddstorageclass
+    - ReadWriteMany
+   storageClassName: uddazurefilescd
+   resources:
+    requests:
+      storage: 10Gi

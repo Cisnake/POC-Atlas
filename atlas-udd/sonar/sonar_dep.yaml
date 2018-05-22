@@ -14,45 +14,24 @@ spec:
         app: atlas-sonar
     spec:
       containers:
-        - image: atlas_udd/sonarqube:1.0
+        - image: poccrmacr.azurecr.io/atlas_udd/sonarqube:1.0
           name: atlas-sonar
           env:
             - name: SONARQUBE_JDBC_USERNAME
-              value: sonar                                                                   
+              value: poccrm@poccrmdbmysql
             - name: SONARQUBE_JDBC_PASSWORD
               valueFrom:
                  secretKeyRef:
                     name: atlas-bd-passwords
-                    key: pwd-sonar                                                                                       
+                    key: pwd-sonar
             - name: SONARQUBE_JDBC_URL
-              value: jdbc:mysql://atlas-mysql:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+              value: jdbc:mysql://poccrmdbmysql.mysql.database.azure.com:3306/sonar?useSSL=true&requireSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
           ports:
             - containerPort: 9000
               name: sonarport
-          resources:
-            limits:
-              cpu: 100m
-              memory: 128Mi
-            request:
-              cpu: 100m
-              memory: 128Mi
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 9000
-            initialDelaySeconds: 60
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 9000
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            failureThreshold: 6
-          volumeMounts:
-            - name: sonar-home-data
-              mountPath: /opt/sonarqube/data
       volumes:
         - name: sonar-home-data
           persistentVolumeClaim:
                  claimName: sonar-claim
+      imagePullSecrets:
+            - name: poccrmacrauth

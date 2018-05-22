@@ -6,9 +6,9 @@ metadata:
   labels:
     name: atlas-sonar
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 19000 
+    - port: 80 
       targetPort: 9000
       name: sonarport
   selector:
