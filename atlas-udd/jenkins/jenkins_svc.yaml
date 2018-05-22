@@ -6,9 +6,9 @@ metadata:
    labels:
       name: atlas-jenkins
 spec:
-   type: NodePort
+   type: LoadBalancer
    ports:
-      - port: 18080
+      - port: 80
         targetPort: 8080
         name: http-port 
       - port: 50000

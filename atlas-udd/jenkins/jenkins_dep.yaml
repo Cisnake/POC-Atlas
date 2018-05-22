@@ -13,13 +13,13 @@ spec:
             app: atlas-jenkins
       spec:
          containers:
-            - name: jenkins-maste
-              image: atlas_udd/jenkins_master:1.0
+            - name: jenkins-master
+              image: poccrmacr.azurecr.io/atlas_udd/jenkinsmaster:4.0
               ports:
                  - name: http-port
                    containerPort: 8080
                  - name: jnlp-port
-                   containerPort: 50000
+                   containerPort: 50000  
               volumeMounts:
                  - name: jenkins-home
                    mountPath: /var/jenkins_home
@@ -27,20 +27,22 @@ spec:
                    mountPath: /tools/maven_repository
                  - name: docker-socket
                    mountPath: /var/run/docker.sock
-                 - name: docker
-                   mountPath: /usr/bin/docker
+                 #- name: docker
+                 #  mountPath: /usr/bin/docker
+         imagePullSecrets:
+            - name: poccrmacrauth
          volumes:
-            - name: maven-repo
-              hostPath:
-                 path: /tools/maven_repository
-                 type: Directory
             - name: jenkins-home
-              emptyDir: {}
+              persistentVolumeClaim:
+                 claimName: jenkins-claim
+            - name: maven-repo
+              persistentVolumeClaim:
+                 claimName: maven-repo-claim
             - name: docker-socket
               hostPath:
                  path: /var/run/docker.sock
                  type: Socket
-            - name: docker
-              hostPath:
-                 path: /usr/bin/docker
-                 type: File     
+            #- name: docker
+            #  hostPath:
+            #     path: /usr/bin/docker
+            #     type: File  
