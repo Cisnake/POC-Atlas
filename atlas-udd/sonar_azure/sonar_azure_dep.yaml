@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: atlas-sonar-azure
+  namespace: atlas-udd
+  labels:
+    name: atlas-sonar-azure
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: atlas-sonar-azure
+      labels:
+        app: atlas-sonar-azure
+    spec:
+      containers:
+        - image: atlas_udd/sonarqube:1.0
+          name: atlas-sonar-azure
+          env:
+            - name: SONARQUBE_JDBC_USERNAME
+              value: poccrm@poccrmdbmysql
+            - name: SONARQUBE_JDBC_PASSWORD
+              value: poc@2019
+            - name: SONARQUBE_JDBC_URL
+              value: jdbc:mysql://poccrmdbmysql.mysql.database.azure.com:3306/sonar_local?useSSL=true&requireSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
+          ports:
+            - containerPort: 9000
+              name: sonarazureport
+          volumeMounts:
+            - name: sonar-azure-data
+              mountPath: /opt/sonarqube/data
+      volumes:
+        - name: sonar-azure-data
+          persistentVolumeClaim:
+            claimName: sonar-azure-data-claim

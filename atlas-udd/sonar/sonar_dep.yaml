@@ -30,8 +30,9 @@ spec:
             - containerPort: 9000
               name: sonarport
           volumeMounts:
-            - name: v-sonar-home-data
+            - name: sonar-data
               mountPath: /opt/sonarqube/data
       volumes:
-        - name: v-sonar-home-data
-          emptyDir: {}
+        - name: sonar-data
+          persistentVolumeClaim:
+            claimName: sonar-data-claim

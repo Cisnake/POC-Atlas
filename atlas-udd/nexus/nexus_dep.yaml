@@ -14,14 +14,15 @@ spec:
             app: atlas-nexus
       spec:
          containers:
-            - image: atlas_udd/nexus:1.0
+            - image: atlas_udd/nexus3:1.0
               name: atlas-nexus
               ports:
               - containerPort: 8081
               - containerPort: 5000
               volumeMounts:
                  - mountPath: /nexus-data
-                   name: nexus-data-volume
+                   name: nexus-data
          volumes:
-            - name: nexus-data-volume
-              emptyDir: {}
+            - name: nexus-data
+              persistentVolumeClaim:
+                 claimName: nexus-data-claim

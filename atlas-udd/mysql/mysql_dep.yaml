@@ -35,10 +35,9 @@ spec:
             - containerPort: 3306
               name: mysqlport
           volumeMounts:
-            - name: v-mysql-lib
+            - name: mysql-data
               mountPath: /var/lib/mysql
       volumes:
-        - name: v-mysql-lib
-          hostPath:
-            path: /volumes/mysql 
-            type: DirectoryOrCreate        
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data-claim
